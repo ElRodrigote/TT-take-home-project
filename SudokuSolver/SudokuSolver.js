@@ -2,7 +2,9 @@ import {
   areSectionsEqual,
   getCol,
   getRow,
-  getSquare
+  getSquare,
+  logBoard,
+  parseBoard
 } from './utils';
 
 import { DECIMAL_ARRAY, SQUARE_COORDS } from './constants';
@@ -156,14 +158,6 @@ const constraintSolver = (board) => {
   return isCellUpdated;
 }
 
-const parseBoard = (board) => {
-  for (let row = 0; row < 9; row += 1) {
-    for (let col = 0; col < 9; col += 1) {
-      if (board[row][col] !== '.') board[row][col] = parseInt(board[row][col])
-    }
-  }
-};
-
 const sudokuSolver = (board) => {
   parseBoard(board);
 
@@ -189,26 +183,7 @@ const sudokuSolver = (board) => {
   return board;
 }
 
-const logCell = (value) => Array.isArray(value) ? '.' : value;
 
-const logBoard = (board) => {
-  const DIVIDER_HORIZONTAL = '|-------|-------|-------|';
-  const DIVIDER_VERTICAL = '|';
-
-  for (let i = 0; i < 9; i += 1) {
-    let row = getRow(board, i);
-
-    if (i % 3 == 0) console.log(DIVIDER_HORIZONTAL);
-
-    console.log(DIVIDER_VERTICAL,
-      logCell(row[0]), logCell(row[1]), logCell(row[2]), DIVIDER_VERTICAL,
-      logCell(row[3]), logCell(row[4]), logCell(row[5]), DIVIDER_VERTICAL,
-      logCell(row[6]), logCell(row[7]), logCell(row[8]), DIVIDER_VERTICAL
-    );
-  }
-
-  console.log(DIVIDER_HORIZONTAL);
-};
 
 // Test cases
 let easyBoard = [
